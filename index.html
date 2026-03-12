@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Zoom Optique | Votre Vision, Notre Engagement</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --vert-medical: #004d40;
+            --blanc: #ffffff;
+            --anthracite: #263238;
+            --gris-fond: #f4f7f6;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* --- BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--anthracite); 
+            background-color: var(--blanc);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. BANDEAU LIVRAISON --- */
+        .delivery-bar {
+            background: var(--vert-medical);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1100;
+        }
+
+        /* --- 2. NAVIGATION STICKY --- */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        header.scrolled nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 12px 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--vert-medical);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--anthracite);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--vert-medical); }
+
+        /* --- 3. SECTION HERO --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 77, 64, 0.6), rgba(0, 77, 64, 0.4)), 
+                        url('clario-8.png.jpeg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 650px; }
+
+        .btn-main {
+            background: var(--vert-medical);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: var(--transition);
+            border: 2px solid var(--vert-medical);
+            cursor: pointer;
+        }
+        .btn-main:hover { background: transparent; border-color: white; }
+
+        /* --- 4. SERVICES --- */
+        .section-padding { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--vert-medical); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--gris-fond);
+            padding: 40px 25px;
+            text-align: center;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        .service-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .service-card i { font-size: 2.8rem; color: var(--vert-medical); margin-bottom: 20px; }
+
+        /* --- 5. SLIDER CATALOGUE (INFINI) --- */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            background: white;
+            padding: 50px 0;
+            position: relative;
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(250px * 14); /* 7 images x 2 pour la boucle */
+            animation: scroll-loop 25s linear infinite;
+        }
+
+        .slider-track img {
+            width: 250px;
+            height: 150px;
+            object-fit: contain;
+            padding: 0 30px;
+        }
+
+        @keyframes scroll-loop {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); }
+        }
+
+        /* --- 6. FORMULAIRE RDV --- */
+        .rdv-section { background: var(--gris-fond); }
+        .rdv-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .full-width { grid-column: span 2; }
+
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--vert-medical);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-submit:hover { background: var(--anthracite); }
+
+        /* --- 7. SECTION EXPERT --- */
+        .expert-flex {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .expert-text { flex: 1; min-width: 320px; }
+        .expert-img-box { flex: 1; min-width: 320px; position: relative; }
+        .expert-img-box img.main-expert { width: 100%; border-radius: 15px; box-shadow: 15px 15px 0 var(--vert-medical); }
+
+        .machines-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 25px;
+        }
+        .machines-grid img { width: 100%; height: 90px; object-fit: cover; border-radius: 8px; opacity: 0.8; transition: 0.3s; }
+        .machines-grid img:hover { opacity: 1; transform: scale(1.05); }
+
+        /* --- 8. GALERIE BOUTIQUE --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item { overflow: hidden; border-radius: 10px; height: 280px; }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.15); }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            background: var(--anthracite);
+            color: white;
+            padding: 70px 5% 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        .footer-col h3 { margin-bottom: 20px; color: var(--blanc); border-left: 3px solid var(--vert-medical); padding-left: 10px; }
+        .footer-col p { margin-bottom: 10px; opacity: 0.8; font-size: 0.95rem; }
+        .social-links a { color: white; font-size: 1.8rem; margin-right: 20px; transition: 0.3s; }
+        .social-links a:hover { color: #2ecc71; }
+
+        /* --- FLOATERS --- */
+        /* WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            z-index: 2000;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Chatbot */
+        .chatbot-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
+        .chatbot-bubble {
+            background: var(--vert-medical);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            left: 0;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        .chatbot-window.active { display: block; animation: fadeInUp 0.4s ease; }
+        .chat-header { background: var(--vert-medical); color: white; padding: 18px; font-weight: 700; }
+        .chat-body { padding: 20px; }
+        .chat-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: var(--gris-fond);
+            border: none;
+            text-align: left;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .chat-btn:hover { background: #e0e6e5; }
+        #chat-response { 
+            margin-top: 15px; 
+            padding: 12px; 
+            background: #f1f8f7; 
+            border-left: 4px solid var(--vert-medical); 
+            font-size: 0.9rem; 
+            display: none; 
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .expert-flex { flex-direction: column-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="delivery-bar">🚚 Livraison gratuite partout au Maroc</div>
+
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">Mega Zoom Optique</a>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#catalogue">Catalogue</a>
+                <a href="#expert">L'Expert</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Votre Vision, Notre Engagement</h1>
+            <p>Opticien diplômé à Rabat (Youssoufia). Précision, technologie et conseil visagisme sur-mesure.</p>
+            <a href="#rdv" class="btn-main">Prendre Rendez-vous</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-eye"></i>
+                <h3>Examen de la Vue</h3>
+                <p>Contrôle précis avec réfractomètre automatique de dernière génération.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-microscope"></i>
+                <h3>Contactologie</h3>
+                <p>Spécialiste en adaptation de lentilles de contact souples et rigides.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-glasses"></i>
+                <h3>Conseil Visagisme</h3>
+                <p>Choix de montures adaptées à votre style et morphologie de visage.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>Atelier Montage</h3>
+                <p>Montage numérique précis et réparations rapides sur place.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="catalogue" class="slider-container">
+        <h2 class="section-title">Sélection Clario</h2>
+        <div class="slider-track">
+            <img src="clario-1.png.png" alt="Modèle 1">
+            <img src="clario-2.png.png" alt="Modèle 2">
+            <img src="clario-3.png.png" alt="Modèle 3">
+            <img src="clario-4.png.png" alt="Modèle 4">
+            <img src="clario-5.png.png" alt="Modèle 5">
+            <img src="clario-6.png.png" alt="Modèle 6">
+            <img src="clario-7.png.png" alt="Modèle 7">
+            <img src="clario-1.png.png" alt="Modèle 1">
+            <img src="clario-2.png.png" alt="Modèle 2">
+            <img src="clario-3.png.png" alt="Modèle 3">
+            <img src="clario-4.png.png" alt="Modèle 4">
+            <img src="clario-5.png.png" alt="Modèle 5">
+            <img src="clario-6.png.png" alt="Modèle 6">
+            <img src="clario-7.png.png" alt="Modèle 7">
+        </div>
+    </div>
+
+    <section id="rdv" class="section-padding rdv-section">
+        <div class="rdv-container">
+            <h2 class="section-title" style="margin-bottom:30px;">Prendre Rendez-vous</h2>
+            <form id="rdvForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" id="prenom" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" id="tel" placeholder="06..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Motif de visite</label>
+                        <select id="motif" required>
+                            <option value="">Sélectionnez...</option>
+                            <option>Examen de vue</option>
+                            <option>Achat lunettes</option>
+                            <option>Adaptation Lentilles</option>
+                            <option>Réparation</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Choisir une date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Confirmer la demande</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="expert" class="section-padding">
+        <div class="expert-flex">
+            <div class="expert-text">
+                <h2 class="section-title" style="text-align:left;">L'Expert à votre écoute</h2>
+                <p>Notre établissement est dirigé par <strong>M. Hamza Bahassi</strong>, opticien diplômé de l'école IPIAB (Promotion 2021).</p>
+                <p style="margin-top:15px;">Passionné par l'optométrie, il met son expertise et sa rigueur au service de votre santé visuelle. Le cabinet dispose d'un plateau technique complet pour une précision absolue.</p>
+                
+                <div class="machines-grid">
+                    <img src="clario-13.png.jpeg" alt="Machine 1">
+                    <img src="clario-14.png.jpeg" alt="Machine 2">
+                    <img src="clario-15.png.jpeg" alt="Machine 3">
+                    <img src="clario-16.png.jpeg" alt="Machine 4">
+                    <img src="clario-17.png.jpeg" alt="Machine 5">
+                    <img src="clario-18.png.jpeg" alt="Machine 6">
+                </div>
+            </div>
+            <div class="expert-img-box">
+                <img src="clario-19.png.jpeg" alt="Hamza Bahassi" class="main-expert">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding gallery-section">
+        <h2 class="section-title">Notre Boutique</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="clario-9.png.jpeg" alt="Boutique 1"></div>
+            <div class="gallery-item"><img src="clario-10.png.jpeg" alt="Boutique 2"></div>
+            <div class="gallery-item"><img src="clario-11.png.jpeg" alt="Boutique 3"></div>
+            <div class="gallery-item"><img src="clario-12.png.jpeg" alt="Boutique 4"></div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>📍 Bloc 8 Numero 15 Bis Youssoufia, Rabat</p>
+                <p>(À côté d'OLIBIA & café DALILA)</p>
+                <p>📞 07 52 93 41 07</p>
+                <p>✉️ bahassih@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horaires</h3>
+                <p>Lundi - Samedi : 09h30 - 20h00</p>
+                <p>Dimanche : Fermé</p>
+            </div>
+            <div class="footer-col social-links">
+                <h3>Réseaux Sociaux</h3>
+                <a href="https://instagram.com/mega.zoom_off" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@mega.zoom_off" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div style="text-align:center; padding-top:30px; border-top: 1px solid rgba(255,255,255,0.1); opacity:0.5; font-size:0.8rem;">
+            &copy; 2026 Mega Zoom Optique. Tous droits réservés.
+        </div>
+    </footer>
+
+    <a href="https://wa.me/212752934107?text=Bonjour%20Mega%20Zoom%20Optique%2C%20j%27aimerais%20avoir%20plus%20d%27informations" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="chatbot-container">
+        <div class="chatbot-bubble" id="chatBtn">
+            <i class="fas fa-comment-medical"></i>
+        </div>
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chat-header">Assistant Conseil</div>
+            <div class="chat-body">
+                <p style="font-size:0.85rem; margin-bottom:15px;">Comment pouvons-nous vous aider ?</p>
+                <button class="chat-btn" data-txt="💧 Yeux secs : Clignez des yeux souvent et utilisez des larmes artificielles sans conservateurs.">💧 Yeux secs</button>
+                <button class="chat-btn" data-txt="👓 Lunettes : Choisissez une monture qui contraste avec la forme de votre visage.">👓 Choisir ses lunettes</button>
+                <button class="chat-btn" data-txt="🕒 Fatigue : Suivez la règle du 20-20-20 : regardez à 20 pieds pendant 20 secondes.">🕒 Fatigue visuelle</button>
+                <button class="chat-btn" data-txt="🔧 Entretien : Utilisez toujours un spray microfibre spécifique, jamais de papier essuie-tout.">🔧 Entretien</button>
+                <div id="chat-response"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Navigation Glassmorphism Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // 2. Chatbot Logic (Toggle & Response)
+        const chatBtn = document.getElementById('chatBtn');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatOpts = document.querySelectorAll('.chat-btn');
+        const chatResponse = document.getElementById('chat-response');
+
+        chatBtn.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+
+        chatOpts.forEach(opt => {
+            opt.addEventListener('click', () => {
+                chatResponse.innerText = opt.getAttribute('data-txt');
+                chatResponse.style.display = 'block';
+            });
+        });
+
+        // 3. Form Submission
+        document.getElementById('rdvForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("✅ Merci " + document.getElementById('prenom').value + ", nous avons bien reçu votre demande. Nous vous contacterons très prochainement !");
+            e.target.reset();
+            chatResponse.style.display = 'none';
+        });
+
+        // 4. Scroll Reveal Animations
+        ScrollReveal().reveal('.service-card, .expert-text, .expert-img-box, .gallery-item', {
+            delay: 200,
+            distance: '30px',
+            origin: 'bottom',
+            duration: 800,
+            interval: 100
+        });
+    </script>
+
+</body>
+</html>
